@@ -24,4 +24,4 @@ def main():
     stop_model(model_arn)
 
 if __name__ == "__main__":
-    main() 
+    main()
