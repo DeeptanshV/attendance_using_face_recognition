@@ -4,10 +4,17 @@ import dlib
 import sys
 # import dotenv
 import use
+import numpy as np
 
-def faces(path):
+def faces(image_np):
     detector = dlib.get_frontal_face_detector()
-    frame = cv2.imread("test_data/" + path)
+    # path = "test_data/" + path
+    # with open(path, 'rb') as fp:
+    #     im_b = fp.read()
+    # image_np = np.frombuffer(im_b, np.uint8)
+    frame = cv2.imdecode(image_np, cv2.IMREAD_COLOR)
+    cv2.imshow("frame", frame)
+    cv2.waitkey(0)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = detector(gray)
     # detect the face
@@ -37,14 +44,11 @@ if __name__ == "__main__":
     #     faces(i, str(idx))
     # idx += 1
 
-    # image_name = sys.argv[1]
-    image_name = "test collage 3.jpg"
-    remove_dir("faces")
+    image_name = "collage.jpg"
+    # remove_dir("faces")
     os.mkdir("faces")
-    faces(image_name)
-    present = []
+    faces(sys.argv[1])
     for i in os.listdir("faces"):
         bytes = open(f"faces/{i}", "rb").read()
-        label = use.get_label(bytes)
-        present.append(label)
-    print(present)
+        # use.get_label(bytes)
+    # remove_dir("faces")
