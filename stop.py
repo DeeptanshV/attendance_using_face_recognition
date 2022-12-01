@@ -1,6 +1,7 @@
 import boto3
 import time
-
+import os
+from dotenv import load_dotenv
 
 def stop_model(model_arn):
 
@@ -20,8 +21,10 @@ def stop_model(model_arn):
     
 def main():
     
-    model_arn='arn:aws:rekognition:us-east-1:843645451050:project/face_recognition_model/version/face_recognition_model.2022-11-30T21.22.27/1669823552738'
+    model_arn=os.getenv("MODEL_ARN")
+    print(model_arn)
     stop_model(model_arn)
 
 if __name__ == "__main__":
-    main() 
+    load_dotenv()
+    main()
